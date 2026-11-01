@@ -1,0 +1,63 @@
+// =============================================================
+// COMPONENTE · BOTÓN  (modelo resuelto: úsalo como referencia)
+// -------------------------------------------------------------
+// Figma → CSS
+//   Auto Layout horizontal       → display: inline-flex
+//   Padding 12 / 24              → padding-block / padding-inline
+//   Corner radius 8              → border-radius: var(--radio-control)
+//   Variante «Hover»             → &:hover
+//   Variante «Secundario»        → modificador .boton--secundario
+//   Fill container               → modificador .boton--bloque
+// Especificidad máxima: .boton--secundario:hover = (0,2,0)
+// =============================================================
+@use "../abstracts" as *;
+
+@layer components {
+  .boton {
+    @include objetivo-tactil;
+
+    display: inline-flex;
+    gap: var(--espacio-2xs);
+    align-items: center;
+    justify-content: center;
+    padding-block: var(--espacio-xs);
+    padding-inline: var(--espacio-m);
+    border: 2px solid transparent;
+    border-radius: var(--radio-control);
+    background-color: var(--color-acento);
+    color: var(--color-sobre-acento);
+    font-weight: 700;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 150ms ease;
+
+    &:hover {
+      background-color: var(--color-acento-hover);
+    }
+
+    &:focus-visible {
+      @include foco-visible;
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    &--bloque {
+      inline-size: 100%;
+    }
+  }
+
+  // Variante secundaria fuera del bloque .boton para que su :hover
+  // quede en (0,2,0): .boton--secundario:hover
+  .boton--secundario {
+    border-color: currentcolor;
+    background-color: transparent;
+    color: var(--color-acento);
+
+    &:hover {
+      background-color: var(--color-acento-tenue);
+    }
+  }
+}

@@ -1,0 +1,8 @@
+// =============================================================
+// ORDEN DE LA CASCADA
+// Las capas declaradas antes PIERDEN frente a las declaradas
+// después, sea cual sea la especificidad de sus selectores.
+// Por eso nunca hace falta !important para que un componente
+// gane a un estilo base.
+// =============================================================
+@layer reset, tokens, base, layout, components, utilities;

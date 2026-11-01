@@ -1,0 +1,97 @@
+// =============================================================
+// COMPONENTE · GUÍA DE ESTILO VIVA
+// Solo lo usa guia.html. Pinta muestras de color, la escala
+// tipográfica y el espaciado a partir de los propios tokens.
+// La muestra recibe su valor por una Custom Property en línea:
+//   <span class="muestra" style="--muestra: var(--color-acento)"></span>
+// Es el ÚNICO uso legítimo de style="" en el proyecto (RA2 · CE b).
+// =============================================================
+@use "../abstracts" as *;
+
+@layer components {
+  .guia {
+    display: grid;
+    gap: var(--espacio-xl);
+    padding-block: var(--espacio-l);
+
+    &__seccion {
+      display: grid;
+      gap: var(--espacio-s);
+    }
+
+    // Las tablas anchas se desplazan dentro de su caja, no la página
+    &__desplazable {
+      overflow-x: auto;
+    }
+
+    &__tabla {
+      inline-size: 100%;
+      border-collapse: collapse;
+
+      th,
+      td {
+        padding: var(--espacio-2xs);
+        border-block-end: 1px solid var(--color-borde);
+        text-align: start;
+        vertical-align: middle;
+      }
+
+      code {
+        white-space: nowrap;
+      }
+    }
+
+    &__tipo {
+      font-size: var(--tam);
+      line-height: var(--interlineado-titulo);
+    }
+
+    &__fila {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--espacio-s);
+      align-items: center;
+    }
+  }
+
+  .guia-cabecera {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--espacio-s);
+    align-items: center;
+    justify-content: space-between;
+    padding-block: var(--espacio-s);
+    border-block-end: 1px solid var(--color-borde);
+  }
+
+  .muestra {
+    display: block;
+    inline-size: 3rem;
+    block-size: 3rem;
+    border: 1px solid var(--color-borde);
+    border-radius: var(--radio-control);
+    background-color: var(--muestra);
+  }
+
+  .barra {
+    display: block;
+    inline-size: var(--ancho);
+    block-size: var(--espacio-s);
+    border-radius: var(--radio-control);
+    background-color: var(--color-acento);
+  }
+
+  .selector-tema {
+    display: flex;
+    gap: var(--espacio-s);
+    align-items: center;
+    border: 0;
+    padding: 0;
+
+    legend {
+      float: inline-start;
+      margin-inline-end: var(--espacio-2xs);
+      font-weight: 700;
+    }
+  }
+}

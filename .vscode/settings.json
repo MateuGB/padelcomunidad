@@ -1,0 +1,12 @@
+{
+  // El validador integrado de VS Code no entiende Sass moderno: Stylelint se encarga
+  "css.validate": false,
+  "scss.validate": false,
+  "stylelint.validate": ["css", "scss"],
+  "editor.codeActionsOnSave": {
+    "source.fixAll.stylelint": "explicit"
+  },
+  "files.associations": {
+    "*.scss": "scss"
+  }
+}

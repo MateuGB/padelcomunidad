@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- TODO Fase 1: nombre de la comunidad de tu ficha de caso -->
+  <title>Guía de estilo · Pádel Las Palmeras</title>
+  <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+  <!--
+    GUÍA DE ESTILO VIVA
+    Esta página se pinta con tus propios tokens: si cambias un valor en
+    scss/abstracts/_tokens.scss, la guía cambia sola. Es la evidencia de
+    que el sistema de diseño funciona (RA1 · CE d y f).
+    Ruta A (Figma): debe coincidir con tus Variables y componentes.
+    Ruta B (VS Code): es tu lienzo de diseño.
+  -->
+  <header class="guia-cabecera contenedor">
+    <p><strong>Pádel Las Palmeras</strong> · Guía de estilo</p>
+
+    <!-- Selector de tema sin JavaScript: lo lee :root:has() en tokens/_index.scss -->
+    <fieldset class="selector-tema">
+      <legend>Tema</legend>
+      <label><input type="radio" name="tema" value="sistema" checked> Sistema</label>
+      <label><input type="radio" name="tema" value="claro"> Claro</label>
+      <label><input type="radio" name="tema" value="oscuro"> Oscuro</label>
+    </fieldset>
+  </header>
+
+  <main class="guia contenedor">
+    <h1>Guía de estilo</h1>
+
+    <!-- ===================================================== -->
+    <section class="guia__seccion" aria-labelledby="color">
+      <h2 id="color">Color</h2>
+      <p>Tokens semánticos: el nombre indica su función, no su tono. Los contrastes los verifica Sass al compilar; aquí se documentan.</p>
+
+      <div class="guia__desplazable" role="region" aria-label="Tabla de tokens de color" tabindex="0">
+      <table class="guia__tabla">
+        <thead>
+          <tr>
+            <th scope="col">Muestra</th>
+            <th scope="col">Token</th>
+            <th scope="col">Uso</th>
+            <th scope="col">Contraste claro</th>
+            <th scope="col">Contraste oscuro</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="muestra" style="--muestra: var(--color-texto)"></span></td>
+            <td><code>--color-texto</code></td>
+            <td>Texto principal</td>
+            <td>17,1:1 sobre fondo</td>
+            <td>17,1:1 sobre fondo</td>
+          </tr>
+          <tr>
+            <td><span class="muestra" style="--muestra: var(--color-acento)"></span></td>
+            <td><code>--color-acento</code></td>
+            <td>Botón principal, enlaces, selección</td>
+            <td>5,15:1 sobre superficie</td>
+            <td>5,12:1 sobre superficie</td>
+          </tr>
+          <!-- TODO Fase 1: una fila por cada token de $tema, con su uso y sus contrastes -->
+        </tbody>
+      </table>
+      </div>
+    </section>
+
+    <!-- ===================================================== -->
+    <section class="guia__seccion" aria-labelledby="tipografia">
+      <h2 id="tipografia">Tipografía</h2>
+      <p>Escala modular fluida: razón 1,2 en móvil y 1,25 en escritorio. Redimensiona la ventana para verla crecer.</p>
+
+      <p class="guia__tipo" style="--tam: var(--paso-5)">Paso 5 · Portada</p>
+      <p class="guia__tipo" style="--tam: var(--paso-4)">Paso 4 · Título de página (h1)</p>
+      <p class="guia__tipo" style="--tam: var(--paso-3)">Paso 3 · Sección (h2)</p>
+      <p class="guia__tipo" style="--tam: var(--paso-2)">Paso 2 · Tarjeta (h3)</p>
+      <p class="guia__tipo" style="--tam: var(--paso-1)">Paso 1 · Destacado</p>
+      <p class="guia__tipo" style="--tam: var(--paso-0)">Paso 0 · Texto de lectura</p>
+      <p class="guia__tipo" style="--tam: var(--paso-menos-1)">Paso −1 · Pie legal y notas</p>
+      <!-- TODO Fase 1: justifica fuente, base y razones en docs/decisiones.md -->
+    </section>
+
+    <!-- ===================================================== -->
+    <section class="guia__seccion" aria-labelledby="espaciado">
+      <h2 id="espaciado">Espaciado</h2>
+      <p>Múltiplos de 4 px. Ningún margen, relleno ni hueco usa un valor fuera de esta escala.</p>
+
+      <div class="guia__fila"><span class="barra" style="--ancho: var(--espacio-2xs)"></span><code>--espacio-2xs</code> 8 px</div>
+      <div class="guia__fila"><span class="barra" style="--ancho: var(--espacio-s)"></span><code>--espacio-s</code> 16 px</div>
+      <div class="guia__fila"><span class="barra" style="--ancho: var(--espacio-m)"></span><code>--espacio-m</code> 24 px</div>
+      <!-- TODO Fase 1: completa la escala -->
+    </section>
+
+    <!-- ===================================================== -->
+    <section class="guia__seccion" aria-labelledby="componentes">
+      <h2 id="componentes">Componentes</h2>
+
+      <h3>Botón</h3>
+      <p>Comprueba hover con el ratón y foco con la tecla Tab. En DevTools, el botón <code>:hov</code> fuerza cada estado.</p>
+      <div class="guia__fila">
+        <button class="boton" type="button">Confirmar reserva</button>
+        <button class="boton boton--secundario" type="button">Volver</button>
+        <button class="boton" type="button" disabled>Desactivado</button>
+      </div>
+      <button class="boton boton--bloque" type="button">Ancho completo (móvil)</button>
+
+      <h3>Tarjeta de turno</h3>
+      <!-- TODO Fase 1: completa scss/components/_turno.scss hasta que los 3 estados se distingan sin depender del color -->
+      <fieldset class="guia__fila">
+        <legend>Turnos del jueves 29 de octubre</legend>
+        <label class="turno">
+          <input class="turno__control" type="radio" name="turno" value="0900">
+          <span class="turno__hora">09:00 – 10:30</span>
+          <span class="turno__estado">Disponible · Pista Central</span>
+        </label>
+        <label class="turno">
+          <input class="turno__control" type="radio" name="turno" value="1030" disabled>
+          <span class="turno__hora">10:30 – 12:00</span>
+          <span class="turno__estado">Ocupado</span>
+        </label>
+        <label class="turno">
+          <input class="turno__control" type="radio" name="turno" value="1800" checked>
+          <span class="turno__hora">18:00 – 19:30</span>
+          <span class="turno__estado">Disponible · Pista Central</span>
+        </label>
+      </fieldset>
+
+      <!-- TODO Fase 1: contador de invitados y aviso de pago -->
+    </section>
+  </main>
+
+  <footer class="contenedor">
+    <p><small>Proyecto académico ficticio · DIW 0615 · 2.º DAW</small></p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,17 @@
+// =============================================================
+// CONTENEDOR CENTRAL
+// Ancho fluido con un máximo y márgenes laterales que crecen con
+// el viewport. Sin anchos fijos en px.
+// =============================================================
+@use "../abstracts" as *;
+
+@layer layout {
+  .contenedor {
+    inline-size: min(100% - 2 * var(--espacio-s), 75rem);
+    margin-inline: auto;
+
+    @include desde("lg") {
+      inline-size: min(100% - 2 * var(--espacio-xl), 75rem);
+    }
+  }
+}

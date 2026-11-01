@@ -1,0 +1,78 @@
+// =============================================================
+// TOKENS → CUSTOM PROPERTIES
+// Convierte los mapas Sass de abstracts/_tokens.scss en variables
+// CSS en :root. Sass trabaja en compilación; las Custom Properties
+// viven en el navegador y por eso pueden cambiar con el tema.
+// No escribas valores aquí: edita abstracts/_tokens.scss.
+// =============================================================
+@use "sass:list";
+@use "sass:map";
+@use "sass:math";
+@use "../abstracts" as *;
+
+// Detiene la compilación si algún par no cumple contraste
+@include verificar-contraste($primitivos, $tema, $pares-contraste);
+
+@layer tokens {
+  :root {
+    // Color: un solo valor por token, resuelto según el tema activo
+    @each $nombre, $par in $tema {
+      $claro: map.get($primitivos, list.nth($par, 1));
+      $oscuro: map.get($primitivos, list.nth($par, 2));
+
+      --color-#{$nombre}: light-dark(#{$claro}, #{$oscuro});
+    }
+
+    // Tipografía: --paso-0 es el texto base; los pasos positivos, títulos
+    @each $paso in $tipo-pasos {
+      $min: $tipo-base-movil * math.pow($tipo-razon-movil, $paso);
+      $max: $tipo-base-escritorio * math.pow($tipo-razon-escritorio, $paso);
+
+      // Los pasos negativos se nombran «menos-1» para evitar --paso--1
+      $nombre: $paso;
+
+      @if $paso < 0 {
+        $nombre: "menos-#{math.abs($paso)}";
+      }
+
+      --paso-#{$nombre}: #{fluido($min, $max)};
+    }
+
+    @each $nombre, $valor in $fuentes {
+      --fuente-#{$nombre}: #{$valor};
+    }
+
+    @each $nombre, $valor in $interlineados {
+      --interlineado-#{$nombre}: #{$valor};
+    }
+
+    @each $nombre, $valor in $espacios {
+      --espacio-#{$nombre}: #{$valor};
+    }
+
+    @each $nombre, $valor in $radios {
+      --radio-#{$nombre}: #{$valor};
+    }
+
+    @each $nombre, $valor in $sombras {
+      --sombra-#{$nombre}: #{$valor};
+    }
+  }
+
+  // ---------------------------------------------------------
+  // TEMA · Por defecto sigue al sistema operativo.
+  // El selector manual (radios name="tema") lo fuerza sin JavaScript.
+  // :where() deja la especificidad en 0 y decide el orden del código.
+  // ---------------------------------------------------------
+  :where(:root) {
+    color-scheme: light dark;
+  }
+
+  :where(:root:has([name="tema"][value="claro"]:checked)) {
+    color-scheme: light;
+  }
+
+  :where(:root:has([name="tema"][value="oscuro"]:checked)) {
+    color-scheme: dark;
+  }
+}

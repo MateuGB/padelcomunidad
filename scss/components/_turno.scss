@@ -1,0 +1,40 @@
+// =============================================================
+// COMPONENTE · TARJETA DE TURNO  (TODO Fase 1: complétalo tú)
+// -------------------------------------------------------------
+// Elegir un turno es elegir UNA opción de un formulario, así que
+// la tarjeta es un <label> que envuelve un radio (ver guia.html):
+//   <label class="turno">
+//     <input class="turno__control" type="radio" name="turno" value="0900">
+//     <span class="turno__hora">09:00 – 10:30</span>
+//     <span class="turno__estado">Disponible · Pista Central</span>
+//   </label>
+// Estados que debes resolver SIN JavaScript:
+//   Disponible   → estado por defecto
+//   Seleccionado → .turno:has(:checked)
+//   Ocupado      → .turno:has(:disabled)   (el radio lleva disabled)
+//   Foco         → .turno:has(:focus-visible)
+// Pista de especificidad: .turno:has(:checked) = (0,2,0) ✔
+//   pero .turno:has(.turno__control:checked) = (0,3,0) ✘
+// Requisitos:
+//   - El estado NO puede comunicarse solo con color (texto + borde/icono)
+//   - Ocupado NO dice qué vivienda reserva (minimización de datos)
+//   - Objetivo táctil ≥ 44 px de alto
+//   - El radio puede ocultarse visualmente, pero nunca con display: none
+//     (dejaría de ser accesible por teclado)
+// =============================================================
+@use "../abstracts" as *;
+
+@layer components {
+  .turno {
+    display: grid;
+    gap: var(--espacio-3xs);
+    padding: var(--espacio-s);
+    border: 1px solid var(--color-borde);
+    border-radius: var(--radio-tarjeta);
+    background-color: var(--color-superficie);
+    cursor: pointer;
+
+    // TODO: .turno__control, .turno__hora, .turno__estado
+    // TODO: estados seleccionado, ocupado y foco
+  }
+}

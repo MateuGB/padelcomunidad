@@ -1,0 +1,26 @@
+// =============================================================
+// FUNCIONES DE APOYO
+// =============================================================
+@use "sass:math";
+
+// Tamaño raíz de referencia: 16 px = 1 rem (valor por defecto del navegador)
+$raiz-px: 16;
+
+// rem(24) → 1.5rem
+// Escribes en px, que es como vienen las cotas de Figma, y entregas rem,
+// que respeta el tamaño de letra que el usuario haya elegido en su navegador.
+@function rem($px) {
+  @return math.div(math.round(math.div($px, $raiz-px) * 10000), 10000) * 1rem;
+}
+
+// fluido(16, 18) → clamp(1rem, 0.963rem + 0.185vw, 1.125rem)
+// Interpola linealmente un tamaño entre dos anchos de viewport:
+// $min-px en $vp-min (móvil) y $max-px en $vp-max (escritorio).
+// Es la misma idea que Utopia.fyi, calculada aquí en tiempo de compilación.
+@function fluido($min-px, $max-px, $vp-min: 360, $vp-max: 1440) {
+  $pendiente: math.div($max-px - $min-px, $vp-max - $vp-min);
+  $corte: $min-px - $pendiente * $vp-min;
+  $vw: math.div(math.round($pendiente * 100 * 1000), 1000);
+
+  @return clamp(#{rem($min-px)}, #{rem($corte)} + #{$vw}vw, #{rem($max-px)});
+}

@@ -1,0 +1,30 @@
+// =============================================================
+// MIXINS
+// =============================================================
+@use "sass:map";
+@use "breakpoints" as *;
+
+// Mobile-First: los estilos fuera del mixin son los de móvil;
+// el mixin solo AÑADE a partir de un ancho mínimo.
+//   @include desde("lg") { grid-template-columns: 3fr 2fr; }
+@mixin desde($bp) {
+  @if not map.has-key($breakpoints, $bp) {
+    @error "Breakpoint «#{$bp}» desconocido. Usa uno de: #{map.keys($breakpoints)}";
+  }
+
+  @media (min-width: map.get($breakpoints, $bp)) {
+    @content;
+  }
+}
+
+// Anillo de foco único para todo el proyecto (contraste ≥ 3:1 en ambos temas)
+@mixin foco-visible {
+  outline: 3px solid var(--color-foco);
+  outline-offset: 2px;
+}
+
+// Tamaño mínimo de objetivo táctil: 44 × 44 px (zona del pulgar)
+@mixin objetivo-tactil {
+  min-block-size: 2.75rem;
+  min-inline-size: 2.75rem;
+}

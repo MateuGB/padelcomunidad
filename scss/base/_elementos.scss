@@ -1,0 +1,57 @@
+// =============================================================
+// ESTILOS BASE DE ELEMENTOS HTML  (RA2 · CE a)
+// Aquí se redefinen las ETIQUETAS, sin clases. Todo lo que un
+// elemento debe parecer "por defecto" en este proyecto.
+// =============================================================
+@use "../abstracts" as *;
+
+@layer base {
+  body {
+    background-color: var(--color-fondo);
+    color: var(--color-texto);
+    font-family: var(--fuente-base);
+    font-size: var(--paso-0);
+    line-height: var(--interlineado-texto);
+  }
+
+  h1,
+  h2,
+  h3 {
+    line-height: var(--interlineado-titulo);
+    text-wrap: balance;
+  }
+
+  h1 {
+    font-size: var(--paso-4);
+  }
+
+  h2 {
+    font-size: var(--paso-3);
+  }
+
+  h3 {
+    font-size: var(--paso-2);
+  }
+
+  a {
+    color: var(--color-acento);
+    text-underline-offset: 0.2em;
+
+    &:hover {
+      text-decoration-thickness: 2px;
+    }
+  }
+
+  :focus-visible {
+    @include foco-visible;
+  }
+
+  code {
+    font-family: var(--fuente-mono);
+    font-size: 0.9em;
+  }
+
+  // TODO Fase 1: redefine al menos estos elementos con tokens
+  //   p (medida máxima de línea en ch), small, strong,
+  //   ul/ol, hr, table/th/td, fieldset/legend, label, input, select
+}

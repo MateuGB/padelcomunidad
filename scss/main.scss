@@ -1,0 +1,12 @@
+// =============================================================
+// PÁDELCOMUNIDAD · Hoja maestra
+// Compila a css/estilos.css  →  npm run dev  (o npm run build)
+// El orden de los @use solo afecta al orden del CSS generado;
+// la prioridad real la decide @layer (ver _capas.scss).
+// =============================================================
+@use "capas";
+@use "tokens";
+@use "base";
+@use "layout";
+@use "components";
+@use "utilities";

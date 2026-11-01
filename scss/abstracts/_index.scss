@@ -1,0 +1,10 @@
+// =============================================================
+// ABSTRACTS · Punto de entrada
+// Este módulo NO genera CSS: solo expone variables, funciones y
+// mixins. Cada parcial lo carga con:  @use "../abstracts" as *;
+// =============================================================
+@forward "funciones";
+@forward "tokens";
+@forward "breakpoints";
+@forward "mixins";
+@forward "contraste";

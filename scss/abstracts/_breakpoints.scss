@@ -1,0 +1,14 @@
+// =============================================================
+// BREAKPOINTS
+// Viven en Sass, no en Custom Properties: una media query NO puede
+// leer var(--algo), porque se evalúa antes que la cascada.
+// Se expresan en em para que respondan también al zoom de texto.
+//   md → 768 px  (tablet vertical)
+//   lg → 1024 px (tablet horizontal / portátil pequeño)
+//   xl → 1440 px (escritorio, marco de Figma)
+// =============================================================
+$breakpoints: (
+  "md": 48em,
+  "lg": 64em,
+  "xl": 90em,
+);

@@ -1,0 +1,56 @@
+// =============================================================
+// VERIFICADOR DE CONTRASTE EN TIEMPO DE COMPILACIÓN
+// Calcula la relación de contraste WCAG 2.x de cada par declarado
+// en $pares-contraste (abstracts/_tokens.scss), en tema claro y
+// oscuro. Si un par no llega al mínimo, la compilación se detiene.
+// No toques este archivo: añade pares en _tokens.scss.
+// =============================================================
+@use "sass:color";
+@use "sass:list";
+@use "sass:map";
+@use "sass:math";
+
+// Canal sRGB (0-255) → valor lineal (fórmula de luminancia relativa WCAG)
+@function canal-lineal($canal) {
+  $c: math.div($canal, 255);
+
+  @if $c <= 0.04045 {
+    @return math.div($c, 12.92);
+  }
+
+  @return math.pow(math.div($c + 0.055, 1.055), 2.4);
+}
+
+@function luminancia($color) {
+  $r: canal-lineal(color.red($color));
+  $g: canal-lineal(color.green($color));
+  $b: canal-lineal(color.blue($color));
+
+  @return 0.2126 * $r + 0.7152 * $g + 0.0722 * $b;
+}
+
+@function contraste($a, $b) {
+  $la: luminancia($a);
+  $lb: luminancia($b);
+
+  @return math.div(math.max($la, $lb) + 0.05, math.min($la, $lb) + 0.05);
+}
+
+// Recorre los pares y detiene la compilación con un mensaje claro
+@mixin verificar-contraste($primitivos, $tema, $pares) {
+  @each $par in $pares {
+    $primero: list.nth($par, 1);
+    $fondo: list.nth($par, 2);
+    $minimo: list.nth($par, 3);
+
+    @each $modo, $i in ("claro": 1, "oscuro": 2) {
+      $c1: map.get($primitivos, list.nth(map.get($tema, $primero), $i));
+      $c2: map.get($primitivos, list.nth(map.get($tema, $fondo), $i));
+      $ratio: contraste($c1, $c2);
+
+      @if $ratio < $minimo {
+        @error "Contraste insuficiente en tema #{$modo}: --color-#{$primero} sobre --color-#{$fondo} = #{math.div(math.round($ratio * 100), 100)}:1 (mínimo #{$minimo}:1)";
+      }
+    }
+  }
+}

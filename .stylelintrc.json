@@ -1,0 +1,50 @@
+{
+  "extends": [
+    "stylelint-config-standard-scss"
+  ],
+  "rules": {
+    "selector-max-specificity": "0,2,0",
+    "selector-max-id": 0,
+    "declaration-no-important": true,
+    "color-no-hex": true,
+    "color-named": "never",
+    "max-nesting-depth": 3,
+    "selector-class-pattern": [
+      "^[a-z][a-z0-9]*(-[a-z0-9]+)*(__[a-z0-9]+(-[a-z0-9]+)*)?(--[a-z0-9]+(-[a-z0-9]+)*)?$",
+      {
+        "message": "Usa BEM en minúsculas: bloque, bloque__elemento, bloque--modificador"
+      }
+    ],
+    "at-rule-disallowed-list": [
+      [
+        "import"
+      ],
+      {
+        "message": "@import está obsoleto en Sass: usa @use y @forward"
+      }
+    ],
+    "number-max-precision": 5,
+    "scss/dollar-variable-empty-line-before": null,
+    "max-line-length": null,
+    "value-list-max-empty-lines": null
+  },
+  "overrides": [
+    {
+      "files": [
+        "scss/abstracts/_tokens.scss"
+      ],
+      "rules": {
+        "color-no-hex": null
+      }
+    },
+    {
+      "files": [
+        "scss/base/_reset.scss",
+        "scss/utilities/**/*.scss"
+      ],
+      "rules": {
+        "declaration-no-important": null
+      }
+    }
+  ]
+}

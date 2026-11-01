@@ -1,0 +1,15 @@
+// =============================================================
+// UTILIDADES · Última capa: ganan siempre.
+// Único lugar del proyecto donde !important está permitido.
+// =============================================================
+@layer utilities {
+  // Oculta visualmente pero mantiene el texto para lectores de pantalla
+  .visualmente-oculto {
+    position: absolute !important;
+    inline-size: 1px !important;
+    block-size: 1px !important;
+    overflow: hidden !important;
+    clip-path: inset(50%) !important;
+    white-space: nowrap !important;
+  }
+}

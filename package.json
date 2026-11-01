@@ -1,0 +1,20 @@
+{
+  "name": "padelcomunidad",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Proyecto integrador DIW 0615 · Portal de reservas de pista de pádel (plantilla de partida)",
+  "scripts": {
+    "dev": "node node_modules/sass/sass.js --watch --no-source-map scss/main.scss:css/estilos.css",
+    "build": "node node_modules/sass/sass.js --no-source-map scss/main.scss:css/estilos.css",
+    "lint": "node node_modules/stylelint/bin/stylelint.js \"scss/**/*.scss\"",
+    "check": "npm run build && npm run lint"
+  },
+  "devDependencies": {
+    "sass": "1.78.0",
+    "stylelint": "14.16.1",
+    "stylelint-config-standard-scss": "6.1.0"
+  },
+  "engines": {
+    "node": ">=12.22"
+  }
+}

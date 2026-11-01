@@ -1,0 +1,144 @@
+// =============================================================
+// TOKENS DE DISEÑO · ÚNICA FUENTE DE VERDAD
+// -------------------------------------------------------------
+// Este es el ÚNICO archivo del proyecto donde se permite escribir
+// un color en hexadecimal (Stylelint lo prohíbe en el resto).
+// Ruta A (Figma): copia aquí los valores de tus Variables de Figma.
+// Ruta B (VS Code): decide aquí los valores y justifícalos en
+//                   docs/decisiones.md y en guia.html.
+// Los valores de ejemplo son los de la Actividad UD2 CORREGIDOS
+// (la paleta original no superaba el contraste mínimo).
+// TODO Fase 1: sustitúyelos por los de tu ficha de caso.
+// =============================================================
+@use "funciones" as *;
+
+// -------------------------------------------------------------
+// 1. PRIMITIVOS · Valores en bruto, sin significado de uso.
+//    Nombre = familia + luminosidad (50 muy claro … 950 muy oscuro).
+//    Un componente NUNCA usa un primitivo directamente.
+// -------------------------------------------------------------
+$primitivos: (
+  "neutro-0": #fff,
+  "neutro-50": #f8fafc,
+  "neutro-200": #e2e8f0,
+  "neutro-400": #94a3b8,
+  "neutro-500": #64748b,
+  "neutro-800": #1e293b,
+  "neutro-900": #0f172a,
+
+  // TODO Fase 1: escala del color de acento de tu ficha de caso (colores seleccionados con oklch.com)
+  "acento-50": #ffeaf8,
+  "acento-300": #ff93c8,
+  "acento-400": #ea7aae,
+  "acento-700": #9f366c,
+  "acento-800": #881f58,
+  "acento-950": #470028,
+
+  "exito-50": #ecfdf5,
+  "exito-300": #6ee7b7,
+  "exito-700": #047857,
+  "exito-950": #022c22,
+
+  "error-50": #ffece8,
+  "error-300": #ff998d,
+  "error-700": #b7191c,
+  "error-950": #4d0000,
+
+);
+
+// -------------------------------------------------------------
+// 2. SEMÁNTICOS · Nombre = FUNCIÓN, nunca proveedor ni color.
+//    («acento», no «bizum»; «texto-suave», no «gris»).
+//    Cada token apunta a un primitivo en tema (claro, oscuro).
+//    Se publican como --color-<nombre> con light-dark().
+// -------------------------------------------------------------
+$tema: (
+  "fondo": ("neutro-50", "neutro-900"),
+  "superficie": ("neutro-0", "neutro-800"),
+  "texto": ("neutro-900", "neutro-50"),
+  "texto-suave": ("neutro-500", "neutro-400"),
+  "borde": ("neutro-200", "neutro-500"),
+  "borde-control": ("neutro-500", "neutro-400"),
+  "acento": ("acento-700", "acento-400"),
+  "acento-hover": ("acento-800", "acento-300"),
+  "sobre-acento": ("neutro-0", "neutro-900"),
+  "acento-tenue": ("acento-50", "acento-950"),
+  "exito": ("exito-700", "exito-300"),
+  "exito-tenue": ("exito-50", "exito-950"),
+  "error": ("error-700", "error-300"),
+  "error-tenue": ("error-50", "error-950"),
+  "foco": ("acento-700", "acento-400"),
+  // TODO Fase 1: añade los que necesites (error, aviso, desactivado…)
+);
+
+// -------------------------------------------------------------
+// 3. PARES QUE DEBEN CUMPLIR CONTRASTE  (texto/elemento, fondo, mínimo)
+//    4.5 → texto normal · 3 → texto grande, bordes de control, foco.
+//    Si añades un token de texto, añade aquí su par: la compilación
+//    se detendrá si no llega al mínimo en algún tema.
+// -------------------------------------------------------------
+$pares-contraste: (
+  ("texto", "fondo", 4.5),
+  ("texto", "superficie", 4.5),
+  ("texto-suave", "superficie", 4.5),
+  ("texto-suave", "fondo", 4.5),
+  ("acento", "superficie", 4.5),
+  ("sobre-acento", "acento", 4.5),
+  ("sobre-acento", "acento-hover", 4.5),
+  ("acento", "acento-tenue", 4.5),
+  ("exito", "exito-tenue", 4.5),
+  ("error", "error-tenue", 4.5),
+  ("error", "superficie", 4.5),
+  ("borde-control", "superficie", 3),
+  ("foco", "fondo", 3),
+);
+
+// -------------------------------------------------------------
+// 4. TIPOGRAFÍA · Escala modular fluida
+//    Móvil: base 16 px, razón 1.2 (tercera menor)
+//    Escritorio: base 18 px, razón 1.25 (tercera mayor)
+//    TODO Fase 1: decide y justifica base y razones en decisiones.md
+// -------------------------------------------------------------
+$tipo-base-movil: 16;
+$tipo-base-escritorio: 18;
+$tipo-razon-movil: 1.2;
+$tipo-razon-escritorio: 1.25;
+$tipo-pasos: (-1, 0, 1, 2, 3, 4, 5);
+
+$fuentes: (
+  "base": #{"system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif"},
+  "mono": #{"ui-monospace, 'Cascadia Code', Menlo, monospace"},
+);
+
+$interlineados: (
+  "titulo": 1.15,
+  "texto": 1.5,
+);
+
+// -------------------------------------------------------------
+// 5. ESPACIADO · Múltiplos de 4 px (rejilla de 8 con medios pasos)
+//    Escribes px (como en Figma) y se publican en rem.
+// -------------------------------------------------------------
+$espacios: (
+  "3xs": rem(4),
+  "2xs": rem(8),
+  "xs": rem(12),
+  "s": rem(16),
+  "m": rem(24),
+  "l": rem(32),
+  "xl": rem(48),
+  "2xl": rem(64),
+);
+
+// -------------------------------------------------------------
+// 6. FORMA · Radios y sombras
+// -------------------------------------------------------------
+$radios: (
+  "control": rem(8),
+  "tarjeta": rem(12),
+  "pildora": 999px,
+);
+
+$sombras: (
+  "tarjeta": #{"0 1px 2px rgb(15 23 42 / 0.08), 0 4px 12px rgb(15 23 42 / 0.06)"},
+);
