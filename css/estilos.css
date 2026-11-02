@@ -16,13 +16,13 @@
     --color-error: light-dark(#b7191c, #ff998d);
     --color-error-tenue: light-dark(#ffece8, #4d0000);
     --color-foco: light-dark(#9f366c, #ea7aae);
-    --paso-menos-1: clamp(0.8333rem, 0.8111rem + 0.099vw, 0.9rem);
+    --paso-menos-1: clamp(0.8333rem, 0.8298rem + 0.016vw, 0.844rem);
     --paso-0: clamp(1rem, 0.9583rem + 0.185vw, 1.125rem);
-    --paso-1: clamp(1.2rem, 1.1312rem + 0.306vw, 1.4063rem);
-    --paso-2: clamp(1.44rem, 1.3341rem + 0.471vw, 1.7578rem);
-    --paso-3: clamp(1.728rem, 1.5716rem + 0.695vw, 2.1973rem);
-    --paso-4: clamp(2.0736rem, 1.8493rem + 0.997vw, 2.7466rem);
-    --paso-5: clamp(2.4883rem, 2.1734rem + 1.4vw, 3.4332rem);
+    --paso-1: clamp(1.2rem, 1.1001rem + 0.444vw, 1.4996rem);
+    --paso-2: clamp(1.44rem, 1.2537rem + 0.828vw, 1.999rem);
+    --paso-3: clamp(1.728rem, 1.4158rem + 1.388vw, 2.6647rem);
+    --paso-4: clamp(2.0736rem, 1.5808rem + 2.19vw, 3.552rem);
+    --paso-5: clamp(2.4883rem, 1.7395rem + 3.328vw, 4.7348rem);
     --fuente-base: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
     --fuente-mono: ui-monospace, 'Cascadia Code', Menlo, monospace;
     --interlineado-titulo: 1.15;
@@ -133,6 +133,10 @@
   code {
     font-family: var(--fuente-mono);
     font-size: 0.9em;
+  }
+  p {
+    max-inline-size: 65ch;
+    text-wrap: pretty;
   }
 }
 @layer layout {

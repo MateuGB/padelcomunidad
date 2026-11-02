@@ -96,13 +96,13 @@ $pares-contraste: (
 // -------------------------------------------------------------
 // 4. TIPOGRAFÍA · Escala modular fluida
 //    Móvil: base 16 px, razón 1.2 (tercera menor)
-//    Escritorio: base 18 px, razón 1.25 (tercera mayor)
+//    Escritorio: base 18 px, razón 1.333 (cuarta justa)
 //    TODO Fase 1: decide y justifica base y razones en decisiones.md
 // -------------------------------------------------------------
 $tipo-base-movil: 16;
 $tipo-base-escritorio: 18;
 $tipo-razon-movil: 1.2;
-$tipo-razon-escritorio: 1.25;
+$tipo-razon-escritorio: 1.333;
 $tipo-pasos: (-1, 0, 1, 2, 3, 4, 5);
 
 $fuentes: (
