@@ -94,8 +94,8 @@
 
 | Componente | Estados | Cómo se resuelve cada estado en CSS |
 | --- | --- | --- |
-| Botón | normal, hover, foco, desactivado, secundario | |
-| Turno | disponible, seleccionado, ocupado, foco | |
+| Botón | normal, hover, foco, desactivado, secundario | **Normal:** fondo `--color-acento` y texto `--color-sobre-acento` (6,52:1 en claro), con `objetivo-tactil` (≥ 44 px). **Hover:** `&:hover` pasa a `--color-acento-hover`, un paso más alejado del fondo, así que el contraste sube (8,81:1). **Foco:** `&:focus-visible` con el mixin `foco-visible` (contorno de 3 px de `--color-foco`, solo al usar el teclado). **Desactivado:** `&:disabled` con `opacity: 0.5` y `cursor: not-allowed`. **Secundario:** el modificador BEM `.boton--secundario` (fondo transparente, borde `currentcolor` y hover `--color-acento-tenue`) va fuera del bloque para que `:hover` quede en (0,2,0). |
+| Turno | disponible, seleccionado, ocupado, foco | La tarjeta es un `<label>` que envuelve un radio, y los estados se leen con `:has()` **sin JavaScript**. El radio se oculta con `opacity: 0` y 1 px (nunca `display: none`), así que sigue funcionando con Tab y las flechas. **Disponible:** por defecto, borde continuo de 2 px y «●» en `--color-exito` delante del texto. **Seleccionado:** `.turno:has(:checked)`, borde `--color-acento`, fondo `--color-acento-tenue` y texto «✓ Seleccionado» en negrita. **Ocupado:** `.turno:has(:disabled)`, borde discontinuo, hora tachada, «✕» en `--color-error` y `cursor: not-allowed`. Solo dice «Ocupado», sin la vivienda (minimización de datos). **Foco:** `.turno:has(:focus-visible)` con el mixin `foco-visible`. Ningún estado depende solo del color: cada uno tiene su icono o texto y su borde (WCAG 1.4.1). Los selectores con `::before` envuelven el estado en `:where()`, así que quedan en (0,1,1) y no en (0,3,1), por debajo del máximo de (0,2,0). *Descartado:* ocultar el radio con `display: none`, porque deja de ser accesible por teclado. |
 | Contador de invitados | | |
 | Aviso de pago | | |
 

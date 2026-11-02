@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @layer reset, tokens, base, layout, components, utilities;
 @layer tokens {
   :root {
@@ -181,15 +182,15 @@
     font-weight: 700;
   }
   label {
-    display: block;
-    margin-block-end: var(--espacio-3xs);
     font-weight: 600;
   }
-  input,
+  input:where(:not([type=radio], [type=checkbox])),
   select {
     min-block-size: 2.75rem;
     min-inline-size: 2.75rem;
+    display: block;
     inline-size: 100%;
+    margin-block-start: var(--espacio-3xs);
     padding: var(--espacio-2xs) var(--espacio-xs);
     border: 1px solid var(--color-borde-control);
     border-radius: var(--radio-control);
@@ -197,7 +198,7 @@
     color: var(--color-texto);
     font: inherit;
   }
-  input:disabled,
+  input:where(:not([type=radio], [type=checkbox])):disabled,
   select:disabled {
     opacity: 0.6;
     cursor: not-allowed;
@@ -258,13 +259,71 @@
 }
 @layer components {
   .turno {
+    min-block-size: 2.75rem;
+    min-inline-size: 2.75rem;
+    position: relative;
     display: grid;
     gap: var(--espacio-3xs);
     padding: var(--espacio-s);
-    border: 1px solid var(--color-borde);
+    border: 2px solid var(--color-borde);
     border-radius: var(--radio-tarjeta);
     background-color: var(--color-superficie);
     cursor: pointer;
+    transition: border-color 150ms ease, background-color 150ms ease;
+  }
+  .turno__control {
+    position: absolute;
+    inline-size: 1px;
+    block-size: 1px;
+    opacity: 0;
+  }
+  .turno__hora {
+    font-size: var(--paso-1);
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+  }
+  .turno__estado {
+    color: var(--color-texto-suave);
+    font-size: var(--paso-menos-1);
+  }
+  .turno:hover {
+    border-color: var(--color-acento);
+  }
+  .turno:has(:checked) {
+    border-color: var(--color-acento);
+    background-color: var(--color-acento-tenue);
+  }
+  .turno:has(:disabled) {
+    border-style: dashed;
+    background-color: var(--color-fondo);
+    cursor: not-allowed;
+  }
+  .turno:has(:focus-visible) {
+    outline: 3px solid var(--color-foco);
+    outline-offset: 2px;
+  }
+  .turno__estado::before {
+    content: "● ";
+    color: var(--color-exito);
+  }
+  :where(.turno:has(:checked)) .turno__estado {
+    color: var(--color-acento);
+    font-weight: 700;
+  }
+  :where(.turno:has(:checked)) .turno__estado::before {
+    content: "✓ Seleccionado · ";
+    color: inherit;
+  }
+  :where(.turno:has(:disabled)) .turno__hora {
+    color: var(--color-texto-suave);
+    text-decoration: line-through;
+  }
+  :where(.turno:has(:disabled)) .turno__estado::before {
+    content: "✕ ";
+    color: var(--color-error);
+  }
+  :where(.turno:has(:disabled)):hover {
+    border-color: var(--color-borde);
   }
 }
 @layer components {

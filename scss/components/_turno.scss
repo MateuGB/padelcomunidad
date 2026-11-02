@@ -1,5 +1,5 @@
 // =============================================================
-// COMPONENTE · TARJETA DE TURNO  (TODO Fase 1: complétalo tú)
+// COMPONENTE · TARJETA DE TURNO
 // -------------------------------------------------------------
 // Elegir un turno es elegir UNA opción de un formulario, así que
 // la tarjeta es un <label> que envuelve un radio (ver guia.html):
@@ -8,33 +8,101 @@
 //     <span class="turno__hora">09:00 – 10:30</span>
 //     <span class="turno__estado">Disponible · Pista Central</span>
 //   </label>
-// Estados que debes resolver SIN JavaScript:
-//   Disponible   → estado por defecto
-//   Seleccionado → .turno:has(:checked)
-//   Ocupado      → .turno:has(:disabled)   (el radio lleva disabled)
-//   Foco         → .turno:has(:focus-visible)
-// Pista de especificidad: .turno:has(:checked) = (0,2,0) ✔
-//   pero .turno:has(.turno__control:checked) = (0,3,0) ✘
+// Estados (sin JavaScript), cada uno con texto + borde, no solo color:
+//   Disponible   → borde continuo, punto verde «●»
+//   Seleccionado → .turno:has(:checked)   borde acento + «✓ Seleccionado»
+//   Ocupado      → .turno:has(:disabled)  borde discontinuo, hora tachada, «✕»
+//   Foco         → .turno:has(:focus-visible)  anillo de foco del proyecto
 // Requisitos:
-//   - El estado NO puede comunicarse solo con color (texto + borde/icono)
 //   - Ocupado NO dice qué vivienda reserva (minimización de datos)
-//   - Objetivo táctil ≥ 44 px de alto
-//   - El radio puede ocultarse visualmente, pero nunca con display: none
-//     (dejaría de ser accesible por teclado)
+//   - Objetivo táctil ≥ 44 px de alto (mixin objetivo-tactil)
+//   - El radio se oculta visualmente, nunca con display: none
+// Especificidad: los selectores con ::before envuelven el estado en
+// :where() para quedarse en (0,1,1) en lugar de (0,3,1).
 // =============================================================
 @use "../abstracts" as *;
 
 @layer components {
   .turno {
+    @include objetivo-tactil;
+
+    position: relative;
     display: grid;
     gap: var(--espacio-3xs);
     padding: var(--espacio-s);
-    border: 1px solid var(--color-borde);
+    border: 2px solid var(--color-borde);
     border-radius: var(--radio-tarjeta);
     background-color: var(--color-superficie);
     cursor: pointer;
+    transition: border-color 150ms ease, background-color 150ms ease;
 
-    // TODO: .turno__control, .turno__hora, .turno__estado
-    // TODO: estados seleccionado, ocupado y foco
+    // El radio se oculta visualmente pero sigue siendo accesible por teclado
+    &__control {
+      position: absolute;
+      inline-size: 1px;
+      block-size: 1px;
+      opacity: 0;
+    }
+
+    &__hora {
+      font-size: var(--paso-1);
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
+    }
+
+    &__estado {
+      color: var(--color-texto-suave);
+      font-size: var(--paso-menos-1);
+    }
+
+    &:hover {
+      border-color: var(--color-acento);
+    }
+
+    &:has(:checked) {
+      border-color: var(--color-acento);
+      background-color: var(--color-acento-tenue);
+    }
+
+    &:has(:disabled) {
+      border-style: dashed;
+      background-color: var(--color-fondo);
+      cursor: not-allowed;
+    }
+
+    &:has(:focus-visible) {
+      @include foco-visible;
+    }
+  }
+
+  // Icono de estado delante del texto (el color nunca va solo)
+  .turno__estado::before {
+    content: "● ";
+    color: var(--color-exito);
+  }
+
+  :where(.turno:has(:checked)) .turno__estado {
+    color: var(--color-acento);
+    font-weight: 700;
+  }
+
+  :where(.turno:has(:checked)) .turno__estado::before {
+    content: "✓ Seleccionado · ";
+    color: inherit;
+  }
+
+  :where(.turno:has(:disabled)) .turno__hora {
+    color: var(--color-texto-suave);
+    text-decoration: line-through;
+  }
+
+  :where(.turno:has(:disabled)) .turno__estado::before {
+    content: "✕ ";
+    color: var(--color-error);
+  }
+
+  // Ocupado no reacciona al ratón (el hover de .turno no debe ganar)
+  :where(.turno:has(:disabled)):hover {
+    border-color: var(--color-borde);
   }
 }
