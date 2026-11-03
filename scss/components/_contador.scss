@@ -1,0 +1,92 @@
+// =============================================================
+// COMPONENTE · CONTADOR DE INVITADOS
+// -------------------------------------------------------------
+// Número de invitados no residentes de la reserva (0 … 2, según
+// la ficha del caso) y lo que cuestan (2,50 € por jugador).
+//   <div class="contador" role="group" aria-labelledby="…">
+//     <span class="contador__etiqueta" id="…">Invitados no residentes</span>
+//     <div class="contador__controles">
+//       <button class="contador__boton" type="button" aria-label="Quitar invitado">−</button>
+//       <output class="contador__valor">1</output>
+//       <button class="contador__boton" type="button" aria-label="Añadir invitado">+</button>
+//     </div>
+//     <span class="contador__nota">Máx. 2 · 2,50 € por invitado</span>
+//     <span class="contador__total">Total: 2,50 €</span>
+//   </div>
+// Estados (el HTML los marca con disabled; en la Fase 2 lo hará JS):
+//   Normal  → los dos botones activos
+//   Mínimo  → «−» disabled (0 invitados)
+//   Máximo  → «+» disabled (2 invitados) y la nota lo dice con texto
+//   Foco    → :focus-visible en cada botón
+// Desactivado no depende solo del color: borde discontinuo y cursor.
+// =============================================================
+@use "../abstracts" as *;
+
+@layer components {
+  .contador {
+    display: grid;
+    gap: var(--espacio-2xs);
+    justify-items: start;
+
+    &__etiqueta {
+      font-weight: 600;
+    }
+
+    &__controles {
+      display: inline-flex;
+      gap: var(--espacio-xs);
+      align-items: center;
+    }
+
+    &__boton {
+      @include objetivo-tactil;
+
+      display: inline-grid;
+      place-items: center;
+      border: 2px solid var(--color-acento);
+      border-radius: var(--radio-pildora);
+      background-color: transparent;
+      color: var(--color-acento);
+      font-size: var(--paso-1);
+      font-weight: 700;
+      line-height: 1;
+      cursor: pointer;
+      transition: background-color 150ms ease;
+
+      &:hover {
+        background-color: var(--color-acento-tenue);
+      }
+
+      &:focus-visible {
+        @include foco-visible;
+      }
+
+      // Va después de :hover con la misma especificidad (0,2,0): gana
+      &:disabled {
+        border-style: dashed;
+        border-color: var(--color-borde-control);
+        background-color: transparent;
+        color: var(--color-texto-suave);
+        cursor: not-allowed;
+      }
+    }
+
+    &__valor {
+      min-inline-size: 2ch;
+      font-size: var(--paso-2);
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
+      text-align: center;
+    }
+
+    &__nota {
+      color: var(--color-texto-suave);
+      font-size: var(--paso-menos-1);
+    }
+
+    &__total {
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
+    }
+  }
+}

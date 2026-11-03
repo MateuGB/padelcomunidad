@@ -89,6 +89,10 @@ $pares-contraste: (
   ("exito", "exito-tenue", 4.5),
   ("error", "error-tenue", 4.5),
   ("error", "superficie", 4.5),
+  // Texto del aviso de pago sobre el fondo de cada variante
+  ("texto", "acento-tenue", 4.5),
+  ("texto", "exito-tenue", 4.5),
+  ("texto", "error-tenue", 4.5),
   ("borde-control", "superficie", 3),
   ("foco", "fondo", 3),
 );

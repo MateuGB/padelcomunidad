@@ -1,0 +1,74 @@
+// =============================================================
+// COMPONENTE · AVISO DE PAGO
+// -------------------------------------------------------------
+// Informa del pago por Bizum de los invitados no residentes.
+//   <div class="aviso aviso--pendiente" role="status">
+//     <p class="aviso__titulo">Pago pendiente · 5,00 €</p>
+//     <p class="aviso__texto">Envía un Bizum al …</p>
+//   </div>
+// Variantes (modificadores BEM):
+//   --pendiente → acento: hay que pagar         icono «i»
+//   --pagado    → éxito: reserva confirmada      icono «✓»
+//   --error     → error: no consta el pago       icono «!»  (role="alert")
+// Cada variante solo cambia dos Custom Properties (--aviso-color e
+// --aviso-icono), así el resto del componente no se repite.
+// El estado se comunica con icono + título, no solo con color.
+// =============================================================
+@use "../abstracts" as *;
+
+@layer components {
+  .aviso {
+    --aviso-color: var(--color-acento);
+    --aviso-fondo: var(--color-acento-tenue);
+    --aviso-icono: "i";
+
+    display: grid;
+    gap: var(--espacio-3xs);
+    padding: var(--espacio-s);
+    padding-inline-start: var(--espacio-m);
+    border: 1px solid var(--aviso-color);
+    border-inline-start-width: 6px;
+    border-radius: var(--radio-tarjeta);
+    background-color: var(--aviso-fondo);
+    color: var(--color-texto);
+
+    &__titulo {
+      display: flex;
+      gap: var(--espacio-2xs);
+      align-items: center;
+      color: var(--aviso-color);
+      font-weight: 700;
+    }
+
+    &__titulo::before {
+      content: var(--aviso-icono);
+      display: inline-grid;
+      flex-shrink: 0;
+      place-items: center;
+      inline-size: 1.5em;
+      block-size: 1.5em;
+      border: 2px solid currentcolor;
+      border-radius: var(--radio-pildora);
+      font-size: var(--paso-menos-1);
+      line-height: 1;
+    }
+
+    &--pendiente {
+      --aviso-color: var(--color-acento);
+      --aviso-fondo: var(--color-acento-tenue);
+      --aviso-icono: "i";
+    }
+
+    &--pagado {
+      --aviso-color: var(--color-exito);
+      --aviso-fondo: var(--color-exito-tenue);
+      --aviso-icono: "✓";
+    }
+
+    &--error {
+      --aviso-color: var(--color-error);
+      --aviso-fondo: var(--color-error-tenue);
+      --aviso-icono: "!";
+    }
+  }
+}

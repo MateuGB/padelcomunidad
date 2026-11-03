@@ -128,7 +128,55 @@
         </label>
       </fieldset>
 
-      <!-- TODO Fase 1: contador de invitados y aviso de pago -->
+      <h3>Contador de invitados</h3>
+      <p>Invitados no residentes: máximo 2 por reserva, 2,50 € por jugador. Los límites desactivan el botón correspondiente.</p>
+      <div class="guia__fila">
+        <div class="contador" role="group" aria-labelledby="contador-min">
+          <span class="contador__etiqueta" id="contador-min">Mínimo (0)</span>
+          <div class="contador__controles">
+            <button class="contador__boton" type="button" aria-label="Quitar invitado" disabled>−</button>
+            <output class="contador__valor">0</output>
+            <button class="contador__boton" type="button" aria-label="Añadir invitado">+</button>
+          </div>
+          <span class="contador__nota">Máx. 2 · 2,50 € por invitado</span>
+          <span class="contador__total">Total: 0,00 €</span>
+        </div>
+        <div class="contador" role="group" aria-labelledby="contador-normal">
+          <span class="contador__etiqueta" id="contador-normal">Normal (1)</span>
+          <div class="contador__controles">
+            <button class="contador__boton" type="button" aria-label="Quitar invitado">−</button>
+            <output class="contador__valor">1</output>
+            <button class="contador__boton" type="button" aria-label="Añadir invitado">+</button>
+          </div>
+          <span class="contador__nota">Máx. 2 · 2,50 € por invitado</span>
+          <span class="contador__total">Total: 2,50 €</span>
+        </div>
+        <div class="contador" role="group" aria-labelledby="contador-max">
+          <span class="contador__etiqueta" id="contador-max">Máximo (2)</span>
+          <div class="contador__controles">
+            <button class="contador__boton" type="button" aria-label="Quitar invitado">−</button>
+            <output class="contador__valor">2</output>
+            <button class="contador__boton" type="button" aria-label="Añadir invitado" disabled>+</button>
+          </div>
+          <span class="contador__nota">Máximo alcanzado: 2 invitados</span>
+          <span class="contador__total">Total: 5,00 €</span>
+        </div>
+      </div>
+
+      <h3>Aviso de pago</h3>
+      <p>El pago de los invitados se hace por Bizum a la comunidad. El estado se indica con icono y título, no solo con color.</p>
+      <div class="aviso aviso--pendiente" role="status">
+        <p class="aviso__titulo">Pago pendiente · 5,00 €</p>
+        <p class="aviso__texto">2 invitados × 2,50 €. Envía un Bizum al <strong>600 000 000</strong> con el concepto «Central 29/10 18:00 · 3º B». La reserva se confirma al recibir el pago.</p>
+      </div>
+      <div class="aviso aviso--pagado" role="status">
+        <p class="aviso__titulo">Pago recibido · Reserva confirmada</p>
+        <p class="aviso__texto">Pista Central, jueves 29 de octubre de 18:00 a 19:30. ¡Buen partido!</p>
+      </div>
+      <div class="aviso aviso--error" role="alert">
+        <p class="aviso__titulo">No consta el pago</p>
+        <p class="aviso__texto">Si no recibimos el Bizum antes de las 17:00, el turno quedará libre para otros vecinos.</p>
+      </div>
     </section>
   </main>
 

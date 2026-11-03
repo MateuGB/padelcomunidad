@@ -42,6 +42,8 @@
 - **Pares de contraste añadidos a `$pares-contraste`:**
   - `error` sobre `error-tenue` (mín. 4,5): 5,81:1 en claro · 7,75:1 en oscuro.
   - `error` sobre `superficie` (mín. 4,5): 6,63:1 en claro · 7,10:1 en oscuro.
+  - `texto` sobre `acento-tenue`, `exito-tenue` y `error-tenue` (mín. 4,5), para el texto del
+    aviso de pago: 15,62 / 16,95 / 15,66:1 en claro · 15,46 / 14,48 / 15,26:1 en oscuro.
   Con la nueva escala, los pares del acento que ya traía la plantilla siguen cumpliendo
   (claro / oscuro): acento sobre superficie 6,52 / 5,50 · sobre-acento sobre acento
   6,52 / 6,71 · acento sobre acento-tenue 5,71 / 6,08 · foco sobre fondo 6,24 / 6,71.
@@ -88,7 +90,20 @@
 
 ## 3. Espaciado y forma
 
-- Escala de espaciado y radios. Si cambias algo respecto a la plantilla, por qué:
+- **Escala de espaciado y radios. Si cambias algo respecto a la plantilla, por qué:**
+  Mantengo la escala de la plantilla: múltiplos de 4 px sobre una rejilla de 8
+  (4, 8, 12, 16, 24, 32, 48, 64 → de `3xs` a `2xl`). Los valores se escriben en px, como en
+  Figma, y se publican en rem, así que crecen si el usuario sube el tamaño de letra del
+  navegador. Con pasos de 4/8 todo queda alineado y basta con una escala corta, sin valores
+  sueltos como 13 o 22 px.
+  Radios: 8 px en los controles (botones, inputs) y 12 px en las tarjetas (turno, fieldset).
+  El elemento que contiene a otro lleva un radio mayor, así las esquinas se ven concéntricas.
+  `pildora` (999px) queda para etiquetas y chips.
+  **Único cambio:** el borde de `.turno` pasa de 1 px a 2 px. Con 1 px, el paso a
+  `--color-acento` al seleccionar y el borde discontinuo del estado ocupado apenas se
+  distinguían, y los estados no deben depender solo de un cambio de color sutil.
+  *Descartado:* una escala de 5 px o valores libres por componente, porque se pierde la
+  alineación con la rejilla de 8 y el sistema es más difícil de mantener.
 
 ## 4. Componentes (RA1 · CE f)
 
@@ -96,8 +111,8 @@
 | --- | --- | --- |
 | Botón | normal, hover, foco, desactivado, secundario | **Normal:** fondo `--color-acento` y texto `--color-sobre-acento` (6,52:1 en claro), con `objetivo-tactil` (≥ 44 px). **Hover:** `&:hover` pasa a `--color-acento-hover`, un paso más alejado del fondo, así que el contraste sube (8,81:1). **Foco:** `&:focus-visible` con el mixin `foco-visible` (contorno de 3 px de `--color-foco`, solo al usar el teclado). **Desactivado:** `&:disabled` con `opacity: 0.5` y `cursor: not-allowed`. **Secundario:** el modificador BEM `.boton--secundario` (fondo transparente, borde `currentcolor` y hover `--color-acento-tenue`) va fuera del bloque para que `:hover` quede en (0,2,0). |
 | Turno | disponible, seleccionado, ocupado, foco | La tarjeta es un `<label>` que envuelve un radio, y los estados se leen con `:has()` **sin JavaScript**. El radio se oculta con `opacity: 0` y 1 px (nunca `display: none`), así que sigue funcionando con Tab y las flechas. **Disponible:** por defecto, borde continuo de 2 px y «●» en `--color-exito` delante del texto. **Seleccionado:** `.turno:has(:checked)`, borde `--color-acento`, fondo `--color-acento-tenue` y texto «✓ Seleccionado» en negrita. **Ocupado:** `.turno:has(:disabled)`, borde discontinuo, hora tachada, «✕» en `--color-error` y `cursor: not-allowed`. Solo dice «Ocupado», sin la vivienda (minimización de datos). **Foco:** `.turno:has(:focus-visible)` con el mixin `foco-visible`. Ningún estado depende solo del color: cada uno tiene su icono o texto y su borde (WCAG 1.4.1). Los selectores con `::before` envuelven el estado en `:where()`, así que quedan en (0,1,1) y no en (0,3,1), por debajo del máximo de (0,2,0). *Descartado:* ocultar el radio con `display: none`, porque deja de ser accesible por teclado. |
-| Contador de invitados | | |
-| Aviso de pago | | |
+| Contador de invitados | normal, mínimo, máximo, hover, foco | Un grupo (`role="group"`) con dos `<button>` y un `<output>` para el valor (0–2 invitados, 2,50 € cada uno, según la ficha). Botones redondos de 44 px (`objetivo-tactil`), con borde y texto `--color-acento`. **Normal:** los dos botones activos. **Hover:** `&:hover` con fondo `--color-acento-tenue`. **Foco:** `&:focus-visible` con el mixin `foco-visible`. **Mínimo / máximo:** el botón que no se puede usar lleva `disabled` («−» con 0 invitados, «+» con 2). `&:disabled` va después de `:hover` con la misma especificidad (0,2,0), así que gana: borde discontinuo, color `--color-texto-suave` (4,5:1) y `cursor: not-allowed`. En el máximo, la nota también lo dice con texto («Máximo alcanzado»), así que no depende solo del color. Cada botón lleva `aria-label` («Añadir invitado» / «Quitar invitado») porque «+» y «−» no se entienden con un lector de pantalla. El valor y el total usan `tabular-nums` para que no bailen al cambiar. En la Fase 1, los estados se muestran fijos en la guía; en la Fase 2 el JS solo tendrá que cambiar `disabled` y el número. *Descartado:* `<input type="number">`, porque sus flechas son diminutas en el móvil y no se pueden estilizar igual en todos los navegadores. |
+| Aviso de pago | pendiente, pagado, error | Bloque `.aviso` con modificadores BEM `--pendiente`, `--pagado` y `--error`. Cada modificador solo cambia **tres Custom Properties** (`--aviso-color`, `--aviso-fondo` y `--aviso-icono`), y el resto del componente no se repite. **Pendiente:** acento, icono «i», y el importe, el Bizum de la comunidad (600 000 000) y el concepto con turno y vivienda. **Pagado:** éxito, icono «✓» y «Reserva confirmada». **Error:** error, icono «!» y la consecuencia (el turno se libera). Lleva `role="alert"` para que el lector de pantalla lo anuncie enseguida; los otros dos, `role="status"`. El estado se comunica con icono y título, no solo con color. El borde izquierdo de 6 px refuerza la variante. El icono se dibuja con `::before` y `content: var(--aviso-icono)`, sin selectores de estado, así que la especificidad se queda en (0,1,1). He añadido a `$pares-contraste` el texto sobre cada fondo tenue (`texto` sobre `acento-tenue`, `exito-tenue` y `error-tenue`), y los títulos ya estaban cubiertos por los pares `acento`, `exito` y `error` sobre su fondo tenue. *Descartado:* un solo color para todos los avisos con el tipo escrito en el texto, porque el usuario necesita distinguir de un vistazo si tiene que pagar o ya está todo hecho. |
 
 ## 5. Comparativa de tecnologías (RA1 · CE e · RA2 · CE i)
 
