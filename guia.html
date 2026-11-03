@@ -3,7 +3,6 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- TODO Fase 1: nombre de la comunidad de tu ficha de caso -->
   <title>Guía de estilo · Pádel Las Adelfas</title>
   <link rel="stylesheet" href="css/estilos.css">
 </head>
@@ -49,20 +48,110 @@
         </thead>
         <tbody>
           <tr>
+            <td><span class="muestra" style="--muestra: var(--color-fondo)"></span></td>
+            <td><code>--color-fondo</code></td>
+            <td>Fondo de la página, turno ocupado</td>
+            <td>Fondo (texto encima: 17,06:1)</td>
+            <td>Fondo (texto encima: 17,06:1)</td>
+          </tr>
+          <tr>
+            <td><span class="muestra" style="--muestra: var(--color-superficie)"></span></td>
+            <td><code>--color-superficie</code></td>
+            <td>Tarjetas, turnos, campos de formulario</td>
+            <td>Fondo (texto encima: 17,85:1)</td>
+            <td>Fondo (texto encima: 13,98:1)</td>
+          </tr>
+          <tr>
             <td><span class="muestra" style="--muestra: var(--color-texto)"></span></td>
             <td><code>--color-texto</code></td>
             <td>Texto principal</td>
-            <td>17,1:1 sobre fondo</td>
-            <td>17,1:1 sobre fondo</td>
+            <td>17,06:1 sobre fondo</td>
+            <td>17,06:1 sobre fondo</td>
+          </tr>
+          <tr>
+            <td><span class="muestra" style="--muestra: var(--color-texto-suave)"></span></td>
+            <td><code>--color-texto-suave</code></td>
+            <td>Notas, <code>small</code>, estado del turno, botón desactivado</td>
+            <td>4,55:1 sobre fondo · 4,76:1 sobre superficie</td>
+            <td>6,96:1 sobre fondo · 5,71:1 sobre superficie</td>
+          </tr>
+          <tr>
+            <td><span class="muestra" style="--muestra: var(--color-borde)"></span></td>
+            <td><code>--color-borde</code></td>
+            <td>Separadores decorativos: <code>hr</code>, tablas, tarjetas</td>
+            <td>Decorativo, sin mínimo (1,23:1)</td>
+            <td>Decorativo, sin mínimo (3,07:1)</td>
+          </tr>
+          <tr>
+            <td><span class="muestra" style="--muestra: var(--color-borde-control)"></span></td>
+            <td><code>--color-borde-control</code></td>
+            <td>Borde de <code>input</code> y <code>select</code>, contador desactivado</td>
+            <td>4,76:1 sobre superficie (mín. 3)</td>
+            <td>5,71:1 sobre superficie (mín. 3)</td>
           </tr>
           <tr>
             <td><span class="muestra" style="--muestra: var(--color-acento)"></span></td>
             <td><code>--color-acento</code></td>
-            <td>Botón principal, enlaces, selección</td>
-            <td>5,15:1 sobre superficie</td>
-            <td>5,12:1 sobre superficie</td>
+            <td>Botón principal, enlaces, turno seleccionado, contador</td>
+            <td>6,52:1 sobre superficie</td>
+            <td>5,50:1 sobre superficie</td>
           </tr>
-          <!-- TODO Fase 1: una fila por cada token de $tema, con su uso y sus contrastes -->
+          <tr>
+            <td><span class="muestra" style="--muestra: var(--color-acento-hover)"></span></td>
+            <td><code>--color-acento-hover</code></td>
+            <td>Hover del botón principal</td>
+            <td>8,81:1 con <code>sobre-acento</code></td>
+            <td>8,72:1 con <code>sobre-acento</code></td>
+          </tr>
+          <tr>
+            <td><span class="muestra" style="--muestra: var(--color-sobre-acento)"></span></td>
+            <td><code>--color-sobre-acento</code></td>
+            <td>Texto sobre fondo de acento</td>
+            <td>6,52:1 sobre acento</td>
+            <td>6,71:1 sobre acento</td>
+          </tr>
+          <tr>
+            <td><span class="muestra" style="--muestra: var(--color-acento-tenue)"></span></td>
+            <td><code>--color-acento-tenue</code></td>
+            <td>Fondo del turno seleccionado, aviso pendiente, hover secundario</td>
+            <td>Acento encima: 5,80:1 · texto: 15,87:1</td>
+            <td>Acento encima: 6,08:1 · texto: 15,46:1</td>
+          </tr>
+          <tr>
+            <td><span class="muestra" style="--muestra: var(--color-exito)"></span></td>
+            <td><code>--color-exito</code></td>
+            <td>Turno disponible, aviso de pago recibido</td>
+            <td>5,21:1 sobre éxito tenue · 5,48:1 sobre superficie</td>
+            <td>9,94:1 sobre éxito tenue · 9,60:1 sobre superficie</td>
+          </tr>
+          <tr>
+            <td><span class="muestra" style="--muestra: var(--color-exito-tenue)"></span></td>
+            <td><code>--color-exito-tenue</code></td>
+            <td>Fondo del aviso de pago recibido</td>
+            <td>Texto encima: 16,95:1</td>
+            <td>Texto encima: 14,48:1</td>
+          </tr>
+          <tr>
+            <td><span class="muestra" style="--muestra: var(--color-error)"></span></td>
+            <td><code>--color-error</code></td>
+            <td>Turno ocupado (✕), aviso de pago no recibido</td>
+            <td>5,81:1 sobre error tenue · 6,63:1 sobre superficie</td>
+            <td>7,75:1 sobre error tenue · 7,10:1 sobre superficie</td>
+          </tr>
+          <tr>
+            <td><span class="muestra" style="--muestra: var(--color-error-tenue)"></span></td>
+            <td><code>--color-error-tenue</code></td>
+            <td>Fondo del aviso de pago no recibido</td>
+            <td>Texto encima: 15,66:1</td>
+            <td>Texto encima: 15,26:1</td>
+          </tr>
+          <tr>
+            <td><span class="muestra" style="--muestra: var(--color-foco)"></span></td>
+            <td><code>--color-foco</code></td>
+            <td>Anillo de foco al navegar con teclado</td>
+            <td>6,24:1 sobre fondo (mín. 3)</td>
+            <td>6,71:1 sobre fondo (mín. 3)</td>
+          </tr>
         </tbody>
       </table>
       </div>
@@ -80,7 +169,6 @@
       <p class="guia__tipo" style="--tam: var(--paso-1)">Paso 1 · Destacado</p>
       <p class="guia__tipo" style="--tam: var(--paso-0)">Paso 0 · Texto de lectura</p>
       <p class="guia__tipo" style="--tam: var(--paso-menos-1)">Paso −1 · Pie legal y notas</p>
-      <!-- TODO Fase 1: justifica fuente, base y razones en docs/decisiones.md -->
     </section>
 
     <!-- ===================================================== -->
@@ -88,10 +176,14 @@
       <h2 id="espaciado">Espaciado</h2>
       <p>Múltiplos de 4 px. Ningún margen, relleno ni hueco usa un valor fuera de esta escala.</p>
 
+      <div class="guia__fila"><span class="barra" style="--ancho: var(--espacio-3xs)"></span><code>--espacio-3xs</code> 4 px</div>
       <div class="guia__fila"><span class="barra" style="--ancho: var(--espacio-2xs)"></span><code>--espacio-2xs</code> 8 px</div>
+      <div class="guia__fila"><span class="barra" style="--ancho: var(--espacio-xs)"></span><code>--espacio-xs</code> 12 px</div>
       <div class="guia__fila"><span class="barra" style="--ancho: var(--espacio-s)"></span><code>--espacio-s</code> 16 px</div>
       <div class="guia__fila"><span class="barra" style="--ancho: var(--espacio-m)"></span><code>--espacio-m</code> 24 px</div>
-      <!-- TODO Fase 1: completa la escala -->
+      <div class="guia__fila"><span class="barra" style="--ancho: var(--espacio-l)"></span><code>--espacio-l</code> 32 px</div>
+      <div class="guia__fila"><span class="barra" style="--ancho: var(--espacio-xl)"></span><code>--espacio-xl</code> 48 px</div>
+      <div class="guia__fila"><span class="barra" style="--ancho: var(--espacio-2xl)"></span><code>--espacio-2xl</code> 64 px</div>
     </section>
 
     <!-- ===================================================== -->
@@ -108,7 +200,6 @@
       <button class="boton boton--bloque" type="button">Ancho completo (móvil)</button>
 
       <h3>Tarjeta de turno</h3>
-      <!-- TODO Fase 1: completa scss/components/_turno.scss hasta que los 3 estados se distingan sin depender del color -->
       <fieldset class="guia__fila">
         <legend>Turnos del jueves 29 de octubre</legend>
         <label class="turno">

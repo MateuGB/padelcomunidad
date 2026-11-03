@@ -6,9 +6,7 @@
 // Ruta A (Figma): copia aquí los valores de tus Variables de Figma.
 // Ruta B (VS Code): decide aquí los valores y justifícalos en
 //                   docs/decisiones.md y en guia.html.
-// Los valores de ejemplo son los de la Actividad UD2 CORREGIDOS
-// (la paleta original no superaba el contraste mínimo).
-// TODO Fase 1: sustitúyelos por los de tu ficha de caso.
+// Valores del caso 12 · Urbanización Las Adelfas (acento 352°).
 // =============================================================
 @use "funciones" as *;
 
@@ -26,8 +24,8 @@ $primitivos: (
   "neutro-800": #1e293b,
   "neutro-900": #0f172a,
 
-  // TODO Fase 1: escala del color de acento de tu ficha de caso (colores seleccionados con oklch.com)
-  "acento-50": #ffeaf8,
+  // Acento: H 352° en OKLCH (oklch.com), L del 96 % (50) al 26 % (950)
+  "acento-50": #ffedf4,
   "acento-300": #ff93c8,
   "acento-400": #ea7aae,
   "acento-700": #9f366c,
@@ -68,7 +66,6 @@ $tema: (
   "error": ("error-700", "error-300"),
   "error-tenue": ("error-50", "error-950"),
   "foco": ("acento-700", "acento-400"),
-  // TODO Fase 1: añade los que necesites (error, aviso, desactivado…)
 );
 
 // -------------------------------------------------------------
@@ -101,7 +98,7 @@ $pares-contraste: (
 // 4. TIPOGRAFÍA · Escala modular fluida
 //    Móvil: base 16 px, razón 1.2 (tercera menor)
 //    Escritorio: base 18 px, razón 1.333 (cuarta justa)
-//    TODO Fase 1: decide y justifica base y razones en decisiones.md
+//    Justificación en docs/decisiones.md (apartado 2)
 // -------------------------------------------------------------
 $tipo-base-movil: 16;
 $tipo-base-escritorio: 18;
