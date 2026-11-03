@@ -118,14 +118,24 @@
 
 | Criterio | Figma | Penpot | Diseño en código |
 | --- | --- | --- | --- |
-| Coste / licencia | | | |
-| Traslado a código (handoff) | | | |
-| Mantenimiento del sistema | | | |
+| Coste / licencia | Software privativo (SaaS). Hay un plan gratuito con límites (pocos archivos de equipo, modos de variables limitados) y un plan Education gratis para estudiantes verificados. El modo de inspección para desarrollo (*Dev Mode*) es de pago. Los archivos viven en sus servidores. | Código abierto (MPL 2.0) y gratis sin límites de archivos ni de equipo. Se puede instalar en un servidor propio (*self-host*), así que los datos no tienen por qué salir del centro. | Gratis: VS Code, Sass y Stylelint son de código abierto y ya vienen en la plantilla, sin cuentas ni conexión. |
+| Traslado a código (handoff) | Manual: las Variables y los estilos se copian a mano a `_tokens.scss`. El código que generan los plugins usa posiciones absolutas y medidas fijas, y no sirve (README). Riesgo de que el diseño y el código no coincidan. | Mejor que Figma: su modelo se basa en CSS (flex y grid reales) y el panel de inspección da CSS útil gratis. Tiene tokens de diseño nativos exportables. Aun así, hay que trasladarlo a la estructura del proyecto. | No hay traslado: el diseño **es** el código. La guía viva (`guia.html`) muestra los componentes reales compilados, así que no pueden diferir del producto. |
+| Mantenimiento del sistema | Hay que mantener **dos** fuentes: las Variables en Figma y `_tokens.scss`. Cada cambio se hace dos veces. Muy cómodo para explorar ideas visuales y para enseñarlas a alguien que no programa. | Igual que Figma (dos fuentes que sincronizar), aunque sus tokens reducen el trabajo de copia. Comunidad y plugins más pequeños. | **Una sola fuente de verdad** (`_tokens.scss`). El control de versiones es Git, con commits que dicen qué cambió y por qué. Sass y Stylelint comprueban contraste y reglas en cada compilación. Contra: explorar variantes visuales es más lento que arrastrar en un lienzo. |
 
 | Criterio | Sass + CSS propio | CSS nativo sin preprocesador | Bootstrap / Tailwind |
 | --- | --- | --- | --- |
-| Tokens y temas | | | |
-| Peso del CSS final | | | |
-| Control de la cascada | | | |
+| Tokens y temas | Mapas Sass (`$primitivos`, `$tema`) que un `@each` convierte en Custom Properties con `light-dark()`. Sass añade lo que el CSS no puede hacer: **comprobar el contraste al compilar** (`verificar-contraste`) y calcular la escala tipográfica fluida (`fluido()`). | Las Custom Properties y `light-dark()` dan los mismos temas en el navegador, pero sin comprobaciones: un contraste insuficiente no se detectaría hasta probarlo a mano. La escala tipográfica habría que calcularla y escribirla valor a valor. | Bootstrap: variables propias `--bs-*` y modo oscuro con `data-bs-theme`, pero tu paleta tiene que encajar en sus nombres (`primary`, `danger`…). Tailwind: los tokens van en su configuración (`@theme` en la v4) y el tema oscuro con `dark:` en cada clase del HTML. Ninguno comprueba el contraste. |
+| Peso del CSS final | ≈ 12,7 KB **sin minificar** (`css/estilos.css`): solo lo que se usa. | Parecido o un poco mayor: sin bucles ni mixins, lo que genera Sass se escribiría a mano, y el resultado final sería muy similar. | Bootstrap completo: ≈ 230 KB minificado (≈ 30 KB comprimido), y casi todo sin usar si no se personaliza la compilación. Tailwind: pequeño en producción (≈ 10–20 KB), porque solo genera las clases que aparecen en el HTML, pero exige un paso de compilación con su herramienta. |
+| Control de la cascada | Total: `@layer` (reset → tokens → base → layout → components → utilities) decide qué gana sin depender del orden de los archivos. Stylelint limita la especificidad a (0,2,0) y prohíbe IDs y `!important`, salvo en las utilidades. BEM evita choques de nombres. | El mismo `@layer` y las mismas reglas de Stylelint funcionan igual: la cascada no depende de Sass. Lo que se pierde es organizar el código en parciales con `@use`. | Bootstrap: su CSS ya trae especificidad propia y para sobrescribirlo a menudo hace falta subirla o usar `!important`. Tailwind: casi no hay cascada (una clase, una propiedad), pero el diseño se traslada al HTML con largas listas de clases y los estados se repiten en cada elemento. |
 
 **Decisión y motivo:**
+**Diseño en código (Ruta B) con Sass + CSS propio.**
+
+- **Por qué no Figma ni Penpot:** el proyecto es un sistema pequeño (un acento, una escala, cuatro componentes) que yo mismo diseño y programo. No hay que pasar el diseño a otra persona, así que mantener una segunda fuente de verdad solo añade trabajo y el riesgo de que no coincida con el código. Si hubiera que presentarlo a la comunidad o trabajar con un diseñador, elegiría **Penpot**, por ser libre, gratuito y más cercano a CSS.
+- **Por qué Sass:** lo que aporta al proyecto no es sintaxis más cómoda, sino **comprobar el contraste y calcular la escala tipográfica al compilar**. Así cumplir WCAG queda garantizado en cada compilación, en los dos temas. La cascada la controlan `@layer` y Stylelint, que son CSS nativo y seguirían sirviendo si un día se quitara Sass.
+- **Por qué no Bootstrap ni Tailwind:**
+  - **Bootstrap:** su peso se debe sobre todo a código que no se usa.
+  - **Tailwind:** saca el diseño del CSS y lo lleva al HTML.
+  - **Los dos:** imponen su forma de nombrar las cosas sobre los tokens semánticos del caso.
+  - **Además:** el módulo evalúa que sepa construir el sistema, no que configure uno ajeno.
+- **Coste:** cero. Todo es de código abierto y funciona sin conexión, porque las dependencias vienen en `node_modules`.
