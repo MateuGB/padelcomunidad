@@ -1,0 +1,116 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 640" width="1000" height="640" font-family="system-ui, sans-serif" role="img" aria-labelledby="titulo desc">
+  <title id="titulo">Mapa de navegación · Pádel Las Adelfas</title>
+  <desc id="desc">Siete páginas del portal y los enlaces entre ellas: flujo de la tarea, menú de la cabecera y enlaces legales del pie.</desc>
+
+  <defs>
+    <marker id="f-flujo" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#b0234a"/>
+    </marker>
+    <marker id="f-menu" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#1d4ed8"/>
+    </marker>
+    <marker id="f-pie" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#555"/>
+    </marker>
+    <style>
+      .caja { fill: #fff; stroke: #333; stroke-width: 1.5; }
+      .caja--lectura { fill: #f4f4f4; }
+      .comun { fill: #eef2ff; stroke: #1d4ed8; stroke-width: 1.5; stroke-dasharray: 6 4; }
+      .nombre { font-size: 15px; font-weight: 700; text-anchor: middle; fill: #111; }
+      .archivo { font-size: 12px; font-family: ui-monospace, monospace; text-anchor: middle; fill: #444; }
+      .etq { font-size: 11px; fill: #222; }
+      .flujo { stroke: #b0234a; stroke-width: 2; fill: none; marker-end: url(#f-flujo); }
+      .menu { stroke: #1d4ed8; stroke-width: 2; fill: none; marker-end: url(#f-menu); }
+      .pie { stroke: #555; stroke-width: 2; stroke-dasharray: 5 4; fill: none; marker-end: url(#f-pie); }
+    </style>
+  </defs>
+
+  <rect width="1000" height="640" fill="#fff"/>
+  <text x="20" y="30" font-size="18" font-weight="700" fill="#111">Mapa de navegación · Pádel Las Adelfas</text>
+
+  <!-- ===== Páginas de tarea (flujo) ===== -->
+  <rect class="caja" x="20" y="70" width="160" height="60" rx="8"/>
+  <text class="nombre" x="100" y="96">Turnos</text>
+  <text class="archivo" x="100" y="116">index.html</text>
+
+  <rect class="caja" x="280" y="70" width="160" height="60" rx="8"/>
+  <text class="nombre" x="360" y="96">Confirmar reserva</text>
+  <text class="archivo" x="360" y="116">reserva.html</text>
+
+  <rect class="caja" x="540" y="70" width="160" height="60" rx="8"/>
+  <text class="nombre" x="620" y="96">Justificante</text>
+  <text class="archivo" x="620" y="116">justificante.html</text>
+
+  <rect class="caja" x="800" y="70" width="160" height="60" rx="8"/>
+  <text class="nombre" x="880" y="96">Mis turnos</text>
+  <text class="archivo" x="880" y="116">mis-turnos.html</text>
+
+  <!-- Flechas del flujo de la tarea -->
+  <line class="flujo" x1="180" y1="100" x2="278" y2="100"/>
+  <text class="etq" x="230" y="118" text-anchor="middle">botón</text>
+  <text class="etq" x="230" y="130" text-anchor="middle">Continuar</text>
+
+  <line class="flujo" x1="440" y1="100" x2="538" y2="100"/>
+  <text class="etq" x="490" y="118" text-anchor="middle">botón</text>
+  <text class="etq" x="490" y="130" text-anchor="middle">Confirmar</text>
+  <text class="etq" x="490" y="142" text-anchor="middle">reserva</text>
+
+  <line class="flujo" x1="700" y1="100" x2="798" y2="100"/>
+  <text class="etq" x="750" y="118" text-anchor="middle">enlace</text>
+  <text class="etq" x="750" y="130" text-anchor="middle">Mis turnos</text>
+
+  <!-- Confirmar reserva → Normas (enlace en la casilla de aceptación) -->
+  <polyline class="flujo" points="360,70 360,50 8,50 8,500 128,500"/>
+  <text class="etq" x="14" y="300">enlace «normas»</text>
+  <text class="etq" x="14" y="313">en la casilla</text>
+  <text class="etq" x="14" y="326">de aceptación</text>
+
+  <!-- ===== Cabecera y pie comunes ===== -->
+  <rect class="comun" x="300" y="250" width="400" height="70" rx="8"/>
+  <text class="nombre" x="500" y="279">Cabecera y pie (todas las páginas)</text>
+  <text class="archivo" x="500" y="300">header: marca + menú Principal · footer: Legal</text>
+
+  <!-- Menú de la cabecera -->
+  <line class="menu" x1="360" y1="250" x2="102" y2="132"/>
+  <text class="etq" x="225" y="210" text-anchor="end">menú: Turnos</text>
+  <text class="etq" x="225" y="223" text-anchor="end">y marca del sitio</text>
+
+  <line class="menu" x1="640" y1="250" x2="878" y2="132"/>
+  <text class="etq" x="790" y="215">menú: Mis turnos</text>
+
+  <!-- Menú y pie hacia Normas -->
+  <line class="menu" x1="380" y1="320" x2="227" y2="468"/>
+  <text class="etq" x="280" y="390" text-anchor="end">menú y pie:</text>
+  <text class="etq" x="280" y="403" text-anchor="end">Normas</text>
+
+  <!-- Pie legal -->
+  <line class="pie" x1="500" y1="320" x2="500" y2="468"/>
+  <text class="etq" x="508" y="400">pie: Aviso legal</text>
+
+  <line class="pie" x1="620" y1="320" x2="773" y2="468"/>
+  <text class="etq" x="715" y="385">pie: Privacidad</text>
+
+  <!-- ===== Páginas de lectura ===== -->
+  <rect class="caja caja--lectura" x="130" y="470" width="190" height="60" rx="8"/>
+  <text class="nombre" x="225" y="496">Normas</text>
+  <text class="archivo" x="225" y="516">normas.html</text>
+
+  <rect class="caja caja--lectura" x="405" y="470" width="190" height="60" rx="8"/>
+  <text class="nombre" x="500" y="496">Aviso legal</text>
+  <text class="archivo" x="500" y="516">aviso-legal.html</text>
+
+  <rect class="caja caja--lectura" x="680" y="470" width="190" height="60" rx="8"/>
+  <text class="nombre" x="775" y="496">Privacidad</text>
+  <text class="archivo" x="775" y="516">privacidad.html</text>
+
+  <!-- ===== Leyenda ===== -->
+  <g transform="translate(20 580)">
+    <line class="flujo" x1="0" y1="10" x2="40" y2="10"/>
+    <text class="etq" x="50" y="14">Flujo de la tarea (botones y enlaces dentro de la página)</text>
+    <line class="menu" x1="360" y1="10" x2="400" y2="10"/>
+    <text class="etq" x="410" y="14">Global: menú de la cabecera</text>
+    <line class="pie" x1="600" y1="10" x2="640" y2="10"/>
+    <text class="etq" x="650" y="14">Legal: enlaces del pie</text>
+    <text class="etq" x="0" y="40">Desde cualquier página se vuelve a Turnos con el menú o la marca, sin usar el botón Atrás del navegador.</text>
+  </g>
+</svg>
