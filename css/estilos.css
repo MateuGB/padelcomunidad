@@ -422,6 +422,10 @@
   :where(.turno:has(:disabled)):hover {
     border-color: var(--color-borde);
   }
+  .turnos {
+    display: grid;
+    gap: var(--espacio-2xs);
+  }
 }
 @layer components {
   .contador {
