@@ -1,0 +1,14 @@
+// =============================================================
+// HUECO  (bloque gris de las plantillas, marca contenido pendiente)
+// =============================================================
+@use "../abstracts" as *;
+
+@layer layout {
+  .hueco {
+    margin-block: var(--espacio-s);
+    padding: var(--espacio-l);
+    border: 2px dashed var(--color-borde-control);
+    border-radius: var(--radio-control);
+    color: var(--color-texto-suave);
+  }
+}
