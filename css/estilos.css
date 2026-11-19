@@ -502,6 +502,8 @@
     color: var(--color-texto);
   }
   .aviso__titulo {
+    margin: 0;
+    font-size: var(--paso-0);
     display: flex;
     gap: var(--espacio-2xs);
     align-items: center;

@@ -33,6 +33,9 @@
     color: var(--color-texto);
 
     &__titulo {
+      // Si el título es un <h2> (como en reserva.html), no hereda el tamaño de título
+      margin: 0;
+      font-size: var(--paso-0);
       display: flex;
       gap: var(--espacio-2xs);
       align-items: center;

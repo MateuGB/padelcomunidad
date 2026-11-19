@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Confirmar reserva · Pádel Las Adelfas</title>
+  <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+  <a class="salto" href="#contenido">Saltar al contenido</a>
+
+  <header class="cabecera">
+    <div class="cabecera__interior contenedor">
+      <a class="cabecera__marca" href="index.html">Pádel Las Adelfas</a>
+      <nav class="menu" aria-label="Principal">
+        <ul class="menu__lista">
+          <li><a class="menu__enlace" href="index.html">Turnos</a></li>
+          <li><a class="menu__enlace" href="mis-turnos.html">Mis turnos</a></li>
+          <li><a class="menu__enlace" href="normas.html">Normas</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="contenido" class="contenedor">
+    <h1>Confirmar reserva</h1>
+
+    <form action="justificante.html" method="get">
+      <section aria-labelledby="resumen">
+        <h2 id="resumen">Turno elegido</h2>
+        <dl>
+          <dt>Fecha</dt>
+          <dd>Jueves, 19 de noviembre de 2026</dd>
+          <dt>Horario</dt>
+          <dd>18:00 – 19:30 (90 minutos)</dd>
+          <dt>Pista</dt>
+          <dd>Central</dd>
+          <dt>Vivienda</dt>
+          <dd>3º B</dd>
+        </dl>
+      </section>
+
+      <fieldset>
+        <legend>¿Cuántos invitados no residentes vienen?</legend>
+        <label><input type="radio" name="invitados" value="0" checked> Ninguno</label>
+        <label><input type="radio" name="invitados" value="1"> 1 invitado (2,50 €)</label>
+        <label><input type="radio" name="invitados" value="2"> 2 invitados (5,00 €)</label>
+      </fieldset>
+
+      <section class="aviso aviso--pendiente" aria-labelledby="aviso-pago">
+        <h2 class="aviso__titulo" id="aviso-pago">Pago de invitados por Bizum</h2>
+        <p class="aviso__texto">Cada invitado no residente paga 2,50 € (máximo 2 por reserva). Envía un Bizum al <strong>600 000 000</strong> antes de jugar con el concepto <code>PADEL 3ºB 19/11</code>. Si no vienen invitados, no hay que pagar nada.</p>
+      </section>
+
+      <p>
+        <label>
+          <input type="checkbox" name="acepto-normas" required>
+          He leído y acepto las <a href="normas.html">normas de uso</a> de las pistas
+        </label>
+      </p>
+
+      <p>
+        <button class="boton boton--bloque" type="submit">Confirmar reserva</button>
+      </p>
+    </form>
+  </main>
+
+  <footer class="pie">
+    <div class="pie__interior contenedor">
+      <address class="pie__datos">
+        Comunidad de Propietarios Urbanización Las Adelfas · CIF H-00000012<br>
+        Paseo de Las Adelfas, 12 · 00000 Localidad Ficticia<br>
+        <a href="mailto:administracion@lasadelfas.example">administracion@lasadelfas.example</a>
+      </address>
+      <nav aria-label="Legal">
+        <ul class="pie__enlaces">
+          <li><a href="aviso-legal.html">Aviso legal</a></li>
+          <li><a href="privacidad.html">Privacidad</a></li>
+          <li><a href="normas.html">Normas de uso</a></li>
+        </ul>
+      </nav>
+      <p class="pie__nota"><small>Proyecto académico ficticio · DIW 0615 · 2.º DAW</small></p>
+    </div>
+  </footer>
+</body>
+</html>
